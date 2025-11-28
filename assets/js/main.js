@@ -66,7 +66,12 @@ function initApp(){
     ];
     setLS('products', sample);
   }
-  if(!getLS('cart', null)) setLS('cart', []);
+ const user = currentUser(); // get the currently logged-in user
+
+// Only create cart if user is NOT an admin
+if(!getLS('cart', null) && (!user || !user.isAdmin)) {
+    setLS('cart', []);
+}
 
   renderNav();
   updateCartBadge();
@@ -213,7 +218,8 @@ function renderProducts(){
         <div class="meta">
           <strong>$${Number(p.price).toFixed(2)}</strong>
           <div>
-            <button class="btn primary" onclick="addToCart('${p.id}')">Add to cart</button>
+            ${(!currentUser() || !currentUser().isAdmin) ? `<button class="btn primary" onclick="addToCart('${p.id}')">Add to cart</button>` : ''}
+
             ${currentUser() && currentUser().isAdmin ? `<button class="btn outlined" onclick="gotoEdit('${p.id}')">Edit</button>
             <button class="btn" style="background:#ef4444;color:white" onclick="deleteProduct('${p.id}')">Delete</button>` : ''}
           </div>
@@ -277,8 +283,15 @@ function addToCart(productId){
 }
 
 function updateCartBadge(){
+  const user = currentUser();
   const badge = document.getElementById('cart-badge') || document.getElementById('cart-badge');
   if(!badge) return;
+
+// Hide badge for admin
+if(user && user.isAdmin){
+    badge.style.display = 'none';
+    return;
+}
   const cart = getCart();
   const count = cart.reduce((s,i)=> s + i.qty, 0);
   badge.textContent = count;
