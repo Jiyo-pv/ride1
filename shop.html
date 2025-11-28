@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Shop — Dynamic Shop</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="mdc-topappbar">
+    <div class="brand">Dynamic Shop</div>
+    <nav id="nav-links"></nav>
+    <div class="cart-icon" onclick="location.href='cart.html'">
+      <span class="material-icons">shopping_cart</span>
+      <span id="cart-badge" class="badge">0</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="toolbar">
+      <h2>Shop</h2>
+      <div>
+        <button class="btn outlined" onclick="location.href='index.html'">Home</button>
+        <button id="btn-add-product" class="btn primary" style="display:none" onclick="location.href='add_product.html'">Add Product</button>
+      </div>
+    </div>
+
+    <div id="product-list" class="grid"></div>
+  </main>
+
+  <div id="snackbar" class="snackbar"></div>
+
+  <script src="assets/js/main.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', ()=>{ initApp(); renderProducts();initProducts(); });</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Edit Product — Dynamic Shop</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="mdc-topappbar">
+    <div class="brand">Dynamic Shop</div>
+    <nav id="nav-links"></nav>
+  </header>
+
+  <main class="container center">
+    <div class="card form-card">
+      <h2>Edit Product</h2>
+      <div class="form">
+        <input id="edit-id" type="hidden">
+        <label class="form-field">
+          <input id="edit-name" type="text" placeholder=" " required>
+          <span class="label">Product name</span>
+        </label>
+        <label class="form-field">
+          <input id="edit-price" type="number" placeholder=" " required>
+          <span class="label">Price</span>
+        </label>
+        <label class="form-field">
+          <textarea id="edit-desc" placeholder=" " rows="4"></textarea>
+          <span class="label">Description</span>
+        </label>
+        <label class="form-field">
+          <input id="edit-image" type="url" placeholder=" ">
+          <span class="label">Image URL (optional)</span>
+        </label>
+        <div class="actions">
+          <button class="btn primary" id="save-edit-btn">Save changes</button>
+          <button class="btn outlined" onclick="location.href='shop.html'">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="snackbar" class="snackbar"></div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{ initApp(); ensureAdminOrRedirect(); loadProductForEdit(); });
+    document.getElementById('save-edit-btn').addEventListener('click', function(e){
+      e.preventDefault();
+      const updated = {
+        id: document.getElementById('edit-id').value,
+        name: document.getElementById('edit-name').value.trim(),
+        price: parseFloat(document.getElementById('edit-price').value),
+        description: document.getElementById('edit-desc').value.trim(),
+        imagename: document.getElementById('edit-image').value.trim()
+      };
+      updateProduct(updated);
+      showSnackbar('Product updated');
+      setTimeout(()=> location.href='shop.html', 700);
+    });
+  </script>
+</body>
+</html>

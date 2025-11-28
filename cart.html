@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cart — Dynamic Shop</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="mdc-topappbar">
+    <div class="brand">Dynamic Shop</div>
+    <nav id="nav-links"></nav>
+  </header>
+
+  <main class="container">
+    <h2>Your Cart</h2>
+    <div id="cart-area"></div>
+  </main>
+
+  <div id="snackbar" class="snackbar"></div>
+
+  <script src="assets/js/main.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', ()=>{ initApp(); renderCartPage(); });</script>
+</body>
+</html>
